@@ -20,7 +20,7 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 #
 ## Architecture Diagram:
 
-![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/aws_glue_integration_mongo.png)
+![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/aws_glue_mongo.png)
 
 #
 
