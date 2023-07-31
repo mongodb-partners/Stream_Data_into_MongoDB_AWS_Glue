@@ -1,18 +1,18 @@
 # Stream data into MongoDB Atlas using AWS Glue
 
 ## Introduction: 
-It demonstrate the seamless integration of AWS Glue, AWS Kinesis, and MongoDB Atlas has emerged as a powerful solution for ETL (Extract, Transform, Load) operations, offering seamless data flow and efficient management across diverse environments.
+It demonstrates the seamless integration of AWS Glue, AWS Kinesis, and MongoDB Atlas has emerged as a powerful solution for ETL (Extract, Transform, Load) operations, offering seamless data flow and efficient management across diverse environments.
 
 It demonstrates a CDK app with an instance of a stack (`kinesis-glue-aws-cdk`)
 
 ## [MongoDB Atlas](https://www.mongodb.com/atlas) 
-MongoDB Atlas is an all purpose database having features like Document Model, Geo-spatial , Time-seires, hybrid deployment, multi cloud services.
-It evolved as "Developer Data Platform", intended to reduce the developers workload on development and management the database environment.
-It also provide a free tier to test out the application / database features.
+MongoDB Atlas is an all-purpose database having features like Document Model, Geo-spatial, Time Series, Hybrid deployment, and multi-cloud services.
+It evolved as a "Developer Data Platform", intended to reduce the developers' workload  and management of the database environment.
+It also provides a free tier to test out the application/database features.
 
 ## [AWS Glue](https://aws.amazon.com/glue/)
 
-AWS Glue is a fully managed serverless data integration service that makes it easy to extract, transform, and load (ETL) from various data sources for analytics and data processing with Apache Spark ETL jobs. In this application, we will receive the incoming requests from producers and process them using Glue Jobs to store in S3 and into MongoDB. Let us assume each request produces an event like the one shown below,
+AWS Glue is a fully managed serverless data integration service that makes it easy to extract, transform, and load (ETL) from various data sources for analytics and data processing with Apache Spark ETL jobs. In this application, we will receive incoming requests from producers and process them using Glue Jobs to store them in S3 and MongoDB. Let us assume each request produces an event like the one shown below,
 
 ## [AWS Kinesis](https://aws.amazon.com/kinesis/)
 
@@ -26,7 +26,7 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
 1.  ## Prerequisites
 
-    This demo, instructions, scripts and cloudformation template is designed to be run in `us-east-1`. With few modifications you can try it out in other regions as well.
+    This demo, instructions, scripts, and cloudformation template are designed to be run in `us-east-1`. With a few modifications, you can try it out in other regions as well.
 
     -  AWS CLI Installed & Configured 
     -  AWS CDK Installed & Configured
@@ -42,12 +42,12 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
       ```bash
       git clone https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue
-      cd kinesis-aws-glue-cdk
+      cd kinesis-glue-aws-cdk
       ```
 
 1.  ## Prepare the dev environment to run AWS CDK
 
-    We will use `cdk` to make our deployments easier. Lets go ahead and install the necessary components.
+    We will use `cdk` to make our deployments easier. Let's go ahead and install the necessary components.
 
     ```bash
     # You should have npm pre-installed
@@ -62,7 +62,7 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
     ```bash
     cdk ls
-    # Follow on screen prompts
+    # Follow on-screen prompts
     ```
 
     You should see an output of the available stacks,
@@ -79,7 +79,7 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
     - **Stack: aws-etl-kinesis-stream-stack**
 
-      This stack will create two kinesis data streams. Each producer runs for ingesting stream of events for different custoemers with their orders. 
+      This stack will create two kinesis data streams. Each producer runs for an ingesting stream of events for different customers with their orders. 
 
       Initiate the deployment with the following command,
 
@@ -91,7 +91,7 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
     - **Stack: aws-etl-bucket-stack**
 
-      This stack will create a S3 bucket that will be used by Glue to persist the incoming customer and order details.
+      This stack will create an S3 bucket that will be used by Glue to persist the incoming customer and order details.
 
       ```bash
       cdk deploy aws-etl-bucket-stack
@@ -101,14 +101,21 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
     - **Stack: aws-etl-glue-job-stack**
 
-      This stack will create two Glue Jobs. One job for customer and another for order. The code is in this location `glue_job_stack/glue_job_scripts/customer_kinesis_streams_s3.py` and `glue_job_stack/glue_job_scripts/order_kinesis_streams_s3.py`
+      This stack will create two Glue Jobs. One job for the customer and another for order. The code is in this location `glue_job_stack/glue_job_scripts/customer_kinesis_streams_s3.py` and `glue_job_stack/glue_job_scripts/order_kinesis_streams_s3.py`
 
       ```bash
       cdk deploy aws-etl-glue-job-stack
       ```
 
-      Once you ready with all stacks, start the producers for customer and order The code is in this location `producer/customer.py` and `producer/order.py`
-      to ingest data into kinesis data stream and also start the Glue job for both.
+- ** Update AWS Glue Studio parameters**
+
+    Update the AWS Glue stuido paramters for MongoDB Atlas URI, User Name and Password
+
+<img width="876" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/00d918df-fd28-4506-909a-3f16723a6024">
+
+    
+      Once you are ready with all stacks, start the producers for the customer and order The code is in this location `producer/customer.py` and `producer/order.py`
+      to ingest data into a kinesis data stream and also start the Glue job for both.
 #
 
 ` Sample record in MongoDB Atlas:`
