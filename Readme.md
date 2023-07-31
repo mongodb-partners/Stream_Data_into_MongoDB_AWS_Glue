@@ -109,7 +109,7 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
     - ** Update AWS Glue Studio parameters**
 
-    Update the AWS Glue stuido paramters for MongoDB Atlas URI, User Name and Password
+    In Job Details tab, update the AWS Glue stuido advanced paramters for MongoDB Atlas URI, User Name and Password. Ensure the S3 location details are updated for "Spark UI logs path"  and "Temporary path"
 
 <img width="876" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/00d918df-fd28-4506-909a-3f16723a6024">
 
