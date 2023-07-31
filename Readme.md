@@ -144,6 +144,12 @@ to ingest data into a kinesis data stream and also start the Glue job for both.
 ```
 #
 
+## Clean up
+
+Use `cdk destroy` to clean up all the AWS CDK resources. 
+Terminate the MongoDB Atlas cluster.
+
+
 ## Useful commands
 
  * `cdk ls`          list all stacks in the app
