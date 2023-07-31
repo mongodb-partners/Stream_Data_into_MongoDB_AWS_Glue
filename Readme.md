@@ -14,7 +14,7 @@ It also provides a free tier to test out the application/database features.
 
 AWS Glue is a fully managed serverless data integration service that makes it easy to extract, transform, and load (ETL) from various data sources for analytics and data processing with Apache Spark ETL jobs. In this application, we will receive incoming requests from producers and process them using Glue Jobs to store them in S3 and MongoDB. Let us assume each request produces an event like the one shown below,
 
-## [AWS Kinesis](https://aws.amazon.com/kinesis/)
+## [Amazon Kinesis](https://aws.amazon.com/kinesis/)
 
 Amazon Kinesis cost-effectively processes and analyzes streaming data at any scale as a fully managed service. With Kinesis, you can ingest real-time data, such as video, audio, application logs, website clickstreams, and IoT telemetry data, for machine learning (ML), analytics, and other applications.
 #
