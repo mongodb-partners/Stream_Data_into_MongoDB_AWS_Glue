@@ -107,15 +107,21 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
       cdk deploy aws-etl-glue-job-stack
       ```
 
-- ** Update AWS Glue Studio parameters**
+    - ** Update AWS Glue Studio parameters**
 
     Update the AWS Glue stuido paramters for MongoDB Atlas URI, User Name and Password
 
 <img width="876" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/00d918df-fd28-4506-909a-3f16723a6024">
 
     
-      Once you are ready with all stacks, start the producers for the customer and order The code is in this location `producer/customer.py` and `producer/order.py`
-      to ingest data into a kinesis data stream and also start the Glue job for both.
+Once you are ready with all stacks, start the producers for the customer and order The code is in this location
+
+      `producer/customer.py` and `producer/order.py`
+      
+to ingest data into a kinesis data stream and also start the Glue job for both.
+
+
+
 #
 
 ` Sample record in MongoDB Atlas:`
