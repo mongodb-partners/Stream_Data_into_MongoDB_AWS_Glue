@@ -68,6 +68,7 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
     You should see an output of the available stacks,
 
     ```bash
+    aws-etl-mongo-atlas-stack
     aws-etl-kinesis-stream-stack
     aws-etl-bucket-stack
     aws-etl-glue-job-stack
@@ -76,6 +77,26 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 1.  ##  Deploying the application
 
     Let us walk through each of the stacks,
+
+    - **Stack: aws-etl-mongo-atlas-stack**
+
+      This stack will create MongoDB Atlas Free tier Cluster. 
+
+      Initiate the deployment with the following command,
+
+      ```bash
+      cdk deploy aws-etl-mongo-atlas-stack
+      ```
+
+      After successfully deploying the stack, Check the `Outputs` section of the stack. You will find the `stdUrl` and `stdSrvUrl` for connection string.
+
+      Stack:
+
+      ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/mongo_atlas_stack_output.png)
+
+      MongoDB Atlas Cluster:
+
+      ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/mongodb_atlas_cluster.png)
 
     - **Stack: aws-etl-kinesis-stream-stack**
 
@@ -89,6 +110,15 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
       After successfully deploying the stack, Check the `Outputs` section of the stack. You will find the `CustomerOrderKinesisDataStream` kinesis function.
 
+      Stack:
+
+      ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/aws_kinesis_stream_stack_output.png)
+
+      Amazon Kinesis Data Stream:
+
+      ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/aws_kinesis_stream.png)
+
+
     - **Stack: aws-etl-bucket-stack**
 
       This stack will create an S3 bucket that will be used by Glue to persist the incoming customer and order details.
@@ -99,6 +129,14 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
       After successfully deploying the stack, Check the `Outputs` section of the stack. You will find the `S3SourceBucket` resource.
 
+      Stack:
+
+      ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/aws_s3_bucket_stack_output.png)
+
+      AWS S3 Bucket:
+
+      ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/aws_s3_bucket.png)
+
     - **Stack: aws-etl-glue-job-stack**
 
       This stack will create two Glue Jobs. One job for the customer and another for order. The code is in this location `glue_job_stack/glue_job_scripts/customer_kinesis_streams_s3.py` and `glue_job_stack/glue_job_scripts/order_kinesis_streams_s3.py`
@@ -107,8 +145,22 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
       cdk deploy aws-etl-glue-job-stack
       ```
 
-    - ** Update AWS Glue Studio parameters**
+      Stack:
 
+      ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/aws_glue_job_stack_output.png)
+
+      AWS Glue Job:
+
+      ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/aws_glue_job.png)
+
+      ** Note **
+
+      Please note that, this CDK application creates MongoDB Atlas Free tier Cluster, as shown in above screen(No.1 & 2). You don't have to create it manuallay. Also, the url of the newly created cluster will be passed to AWS Glue job as a mongodb url paramter.
+
+    Though, You can always pass the parameters using the steps mentioned below.
+
+    - ** Update AWS Glue Studio parameters**
+    
     In Job Details tab, update the AWS Glue stuido advanced paramters for MongoDB Atlas URI, User Name and Password. Ensure the S3 location details are updated for "Spark UI logs path"  and "Temporary path"
 
 <img width="876" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/00d918df-fd28-4506-909a-3f16723a6024">

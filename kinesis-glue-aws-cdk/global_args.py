@@ -18,6 +18,9 @@ class GlobalArgs():
     S3_BUCKET_NAME = "etl-bucket-demo"
     CUSTOMER_STREAM_NAME = "kinesisStream-customer"
     ORDER_STREAM_NAME = "kinesisStream-order"
-    
-    TEMP_DIR = ""
-    SPARK_EVENT_LOGS_PATH = ""
+    AUTH_DATABASE_NAME = "admin"
+    ORG_ID = ""
+    REGION_NAME = "US_EAST_1"
+    IP_ADDRESS = "0.0.0.0/0"
+    IP_COMMENT = "AWS Glue CDK Test"
+    PROFILE = "default"

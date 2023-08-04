@@ -5,8 +5,15 @@ from glue_job_stack.glue_job_stack import GlueJobStack
 from kinesis_glue_aws_cdk.kinesis_glue_aws_cdk_stack import KinesisGlueAwsCdkStack
 from s3_stack.s3_stack import S3Stack
 from global_args import GlobalArgs
+from mongodb_atlas_stack.mongodb_atlas_stack import MongoDBAtlasStack
 
 app = cdk.App()
+
+# MongoDB AtlasBasic stack
+etl_mongo_atlas_stack = MongoDBAtlasStack(
+    app, 
+    f"{app.node.try_get_context('project')}-mongo-atlas-stack"
+)
 
 # Kinesis data stream
 etl_kinesis_stack = KinesisGlueAwsCdkStack(
@@ -31,7 +38,8 @@ etl_glue_job_stack = GlueJobStack(
     f"{app.node.try_get_context('project')}-glue-job-stack",
     cust_src_stream = etl_kinesis_stack.get_customer_stream,
     order_src_stream = etl_kinesis_stack.get_order_stream,
-    etl_bkt = etl_bkt_stack.data_bkt
+    etl_bkt = etl_bkt_stack.data_bkt,
+    mongodb_url = etl_mongo_atlas_stack.get_connection_string_srv
 )
 
 app.synth()
