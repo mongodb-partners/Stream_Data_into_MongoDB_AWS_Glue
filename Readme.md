@@ -66,10 +66,11 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
     Set up the CDK bootstraping
 
-   ```bash
-   cdk bootstrap
-   ```
+       ```bash
+       cdk bootstrap
+       ```
 
+   update the relevant parameters in global_args.py 
 
     ```bash
     cdk ls
