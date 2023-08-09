@@ -94,7 +94,21 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
     - **Stack: aws-etl-mongo-atlas-stack**
 
-      This stack will create MongoDB Atlas Free tier Cluster. 
+      This stack will create MongoDB Atlas Free tier Cluster.
+
+      Prerequisite:
+      
+      a. create a role with its trust relationship as a CloudFormation service
+
+      b.The following Public Extension in the Cloudormation Registry should be activated with the Role created earlier step.
+              MongoDB::Atlas::Project,
+              MongoDB::Atlas::DatabaseUser,
+              MongoDB::Atlas::Cluster,
+              MongoDB::Atlas::ProjectIpAccessList
+      c. Login to MongoDB console and note down the organization ID in which you want to create the database cluster
+      d. create a Data API for the organization with Project Owner access and not down API credentials
+      e. Store the Organization API in AWS Secret Manager
+   
 
       Initiate the deployment with the following command,
 
