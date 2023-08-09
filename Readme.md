@@ -47,10 +47,10 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
 1.  ## Prepare the dev environment to run AWS CDK
 
-    Setup the AWS Environment AWS Access Key ID, AWS Secret Access Key, and optionally AWS Session Token
+    a. Setup the AWS Environment AWS Access Key ID, AWS Secret Access Key, and optionally AWS Session Token
     
 
-    We will use `cdk` to make our deployments easier. Let's go ahead and install the necessary components.
+    b. We will use `cdk` to make our deployments easier. Let's go ahead and install the necessary components.
 
     ```bash
     # You should have npm pre-installed
@@ -64,13 +64,15 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
     ```
     Side Note: for development setup use requirements-dev.txt
 
-    Set up the CDK bootstraping
+    c. Set up the CDK bootstraping
 
        ```bash
        cdk bootstrap
        ```
 
-   update the relevant parameters in global_args.py 
+   d. update the relevant parameters in global_args.py 
+
+   e. list the cdks
 
     ```bash
     cdk ls
