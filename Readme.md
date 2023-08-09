@@ -70,23 +70,23 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
        cdk bootstrap
        ```
 
-   d. update the relevant parameters in global_args.py 
+       d. update the relevant parameters in global_args.py 
 
-   e. list the cdks
+       e. list the cdks
 
-    ```bash
-    cdk ls
-    # Follow on-screen prompts
-    ```
+        ```bash
+        cdk ls
+        # Follow on-screen prompts
+        ```
 
-    You should see an output of the available stacks,
-
-    ```bash
-    aws-etl-mongo-atlas-stack
-    aws-etl-kinesis-stream-stack
-    aws-etl-bucket-stack
-    aws-etl-glue-job-stack
-    ```
+        You should see an output of the available stacks,
+    
+        ```bash
+        aws-etl-mongo-atlas-stack
+        aws-etl-kinesis-stream-stack
+        aws-etl-bucket-stack
+        aws-etl-glue-job-stack
+        ```
 
 1.  ##  Deploying the application
 
