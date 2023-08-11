@@ -66,10 +66,15 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
     c. Set up the CDK bootstraping
 
-     
+        
         cdk bootstrap
+
+       d. update the relevant parameters in global_args.py
        
-       d. update the relevant parameters in global_args.py 
+       * Update the `OrgId` Organization ID from your MongoDB Atlas account. 
+       * Please note that, Using "0.0.0.0/0" as an `IP_ADDRESS` we are allowing access from anywhere. This might be suitable for development or testing purposes but is highly discouraged for production environments because it exposes the database to potential attacks from unauthorized sources.
+
+       <br>
 
        e. list the cdks
 
@@ -97,19 +102,40 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
       
       a. create a role with its trust relationship as a CloudFormation service
 
-      b.The following Public Extension in the Cloudormation Registry should be activated with the Role created earlier step.
+      Use [this template](https://github.com/mongodb/mongodbatlas-cloudformation-resources/blob/master/examples/execution-role.yaml) to create a [new CloudFormation stack](https://console.aws.amazon.com/cloudformation/home#/stacks/create) to create the execution role.
+
+      Execution Role stack:
+
+      ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/execution_role_stack_output.png)
+
+      b.The following Public Extension in the Cloudormation Registry should be activated with the Role created earlier step. Use [this link](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/registry/public-extensions?visibility=PUBLIC&type=RESOURCE&category=THIRD_PARTY) to register extensions on CloudFormation.
       
               MongoDB::Atlas::Project,
               MongoDB::Atlas::DatabaseUser,
               MongoDB::Atlas::Cluster,
               MongoDB::Atlas::ProjectIpAccessList
+
+      Pass the ARN of the role from the earlier step as an input to activate the MongoDB resource in Public Extension.
+
+      MongoDB Resource Activation in Public Extension:
+
+      ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/activate_mongodb_resource.png)
     
       c. Login to MongoDB console and note down the organization ID in which you want to create the database cluster
       
-      d. create a Data API for the organization with Project Owner access and not down API credentials
+      d. create an API Key in an organization for the organization with Project Owner access and not down API credentials
       
       e. Store the Organization API in AWS Secret Manager
    
+      A profile should be created in the AWS Secrets Manager, containing the MongoDB Atlas Programmatic API Key.
+
+      Use [this template](https://github.com/mongodb/mongodbatlas-cloudformation-resources/blob/master/examples/profile-secret.yaml) to create a [new CloudFormation stack](https://console.aws.amazon.com/cloudformation/home#/stacks/create) for the default profile that all resources will attempt to use unless a different override is specified.
+
+      Profile secret Stack:
+
+      ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/profile_secret_mongodb_API.png)
+
+      #
 
       Initiate the deployment with the following command,
 
@@ -150,7 +176,7 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
     - **Stack: aws-etl-bucket-stack**
 
-      This stack will create an S3 bucket that will be used by Glue to persist the incoming customer and order details.
+      This stack will create an S3 bucket that will be used by AWS Glue jobs to persist the incoming customer and order details.
 
       ```bash
       cdk deploy aws-etl-bucket-stack
@@ -168,7 +194,7 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
     - **Stack: aws-etl-glue-job-stack**
 
-      This stack will create two Glue Jobs. One job for the customer and another for order. The code is in this location `glue_job_stack/glue_job_scripts/customer_kinesis_streams_s3.py` and `glue_job_stack/glue_job_scripts/order_kinesis_streams_s3.py`
+      This stack will create two AWS Glue Jobs. One job for the customer and another for order. The code is in this location `glue_job_stack/glue_job_scripts/customer_kinesis_streams_s3.py` and `glue_job_stack/glue_job_scripts/order_kinesis_streams_s3.py`
 
       ```bash
       cdk deploy aws-etl-glue-job-stack
@@ -186,11 +212,22 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
       Please note that, this CDK application creates MongoDB Atlas Free tier Cluster, as shown in above screen(No.1 & 2). You don't have to create it manuallay. Also, the url of the newly created cluster will be passed to AWS Glue job as a mongodb url paramter.
 
+      Location details for "Spark UI logs path" and "Temporary path" will be determined automatically based on current logged-in account.
+
+      Spark UI logs path:
+      
+      `s3://aws-glue-assets-<ACCOUNT_ID>-<REGION_NAME>/sparkHistoryLogs` 
+
+      Temporary path:
+
+      `s3://aws-glue-assets-<ACCOUNT_ID>-<REGION_NAME>/temporary/`
+
     Though, You can always pass the parameters using the steps mentioned below.
 
     - ** Update AWS Glue Studio parameters**
     
-    In Job Details tab, update the AWS Glue stuido advanced paramters for MongoDB Atlas URI, User Name and Password. Ensure the S3 location details are updated for "Spark UI logs path"  and "Temporary path"
+    <br>
+    In Job Details tab, update the AWS Glue stuido advanced paramters for MongoDB Atlas URI, User Name and Password. 
 
 <img width="876" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/00d918df-fd28-4506-909a-3f16723a6024">
 
@@ -230,6 +267,9 @@ to ingest data into a kinesis data stream and also start the Glue job for both.
 Use `cdk destroy` to clean up all the AWS CDK resources. 
 Terminate the MongoDB Atlas cluster.
 
+## Troubleshooting
+
+Refer [this link](https://github.com/mongodb/mongodbatlas-cloudformation-resources/tree/master#troubleshooting) to resolve some common issues encountered when using AWS CloudFormation/CDK with MongoDB Atlas Resources.
 
 ## Useful commands
 

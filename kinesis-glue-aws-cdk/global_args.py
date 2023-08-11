@@ -10,17 +10,17 @@ class GlobalArgs():
     VERSION = "2023_07_11"
     SUPPORT_EMAIL = ["", ]
     
-    MONGODB_URL = ""
-    DATABASE_NAME = "migration"
-    COLLECTION_NAME = "customer_demo"
+    MONGODB_URL = ""  # MongoDB Atlas AWS CDK will create a MongoDB Cluster and will pass it to AWS Glue job stack.
+    DATABASE_NAME = "etl-migration"
+    COLLECTION_NAME = "etl-customer-demo"
     MONGODB_USER = ""
     MONGODB_PASSWORD = ""
     S3_BUCKET_NAME = "etl-bucket-demo"
-    CUSTOMER_STREAM_NAME = "kinesisStream-customer"
-    ORDER_STREAM_NAME = "kinesisStream-order"
+    CUSTOMER_STREAM_NAME = "etl-kinesisStream-customer"
+    ORDER_STREAM_NAME = "etl-kinesisStream-order"
     AUTH_DATABASE_NAME = "admin"
-    ORG_ID = ""
+    ORG_ID = ""  # Your organization from MongoDB Atlas account
     REGION_NAME = "US_EAST_1"
-    IP_ADDRESS = "0.0.0.0/0"
+    IP_ADDRESS = "0.0.0.0/0" # Use for development or testing purpose only
     IP_COMMENT = "AWS Glue CDK Test"
     PROFILE = "default"
