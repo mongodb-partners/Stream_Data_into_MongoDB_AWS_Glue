@@ -20,7 +20,9 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 #
 ## Architecture Diagram:
 
-<img width="962" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/2551fcb1-bf63-4b8b-8b44-f3485901c9e3">
+<img width="971" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/556dbe2f-e13f-4ff8-98e9-4991e6381d85">
+
+
 
 ## Implementation Steps
 
