@@ -1,4 +1,5 @@
 pytest==6.2.5
 boto3
 awscdk_resources_mongodbatlas
-mongodbatlas-construct
+aws-cdk-lib==2.87.0
+constructs>=10.0.0,<11.0.0
