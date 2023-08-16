@@ -13,8 +13,8 @@ class GlobalArgs():
     MONGODB_URL = ""  # MongoDB Atlas AWS CDK will create a MongoDB Cluster and will pass it to AWS Glue job stack.
     DATABASE_NAME = "etl-migration"
     COLLECTION_NAME = "etl-customer-demo"
-    MONGODB_USER = ""
-    MONGODB_PASSWORD = ""
+    MONGODB_USER = "etl-mongodb-cdk"
+    MONGODB_PASSWORD = "etlmongodbpasswd"
     S3_BUCKET_NAME = "etl-bucket-demo"
     CUSTOMER_STREAM_NAME = "etl-kinesisStream-customer"
     ORDER_STREAM_NAME = "etl-kinesisStream-order"
