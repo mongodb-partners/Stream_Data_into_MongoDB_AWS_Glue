@@ -26,8 +26,6 @@ In this GitHub repository, you'll find a tangible showcase of how AWS Glue, Amaz
 
 1.  ## Prerequisites
 
-    This demo, instructions, scripts, and cloudformation template are designed to be run in `us-east-1`. With a few modifications, you can try it out in other regions as well.
-
     -  [AWS CLI Installed & Configured](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
     -  [NVM / NPM installed & Configured](https://nvm.sh) 
     -  [AWS CDK Installed & Configured](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html) 
@@ -36,6 +34,14 @@ In this GitHub repository, you'll find a tangible showcase of how AWS Glue, Amaz
           - [Python3](https://packaging.python.org/en/latest/tutorials/installing-packages/#ensure-you-can-run-python-from-the-command-line) - `yum install -y python3`
           - [Python Pip](https://packaging.python.org/en/latest/tutorials/installing-packages/#ensure-you-can-run-pip-from-the-command-line) - `yum install -y python-pip`
           - [Virtualenv](https://docs.python.org/3/library/venv.html) - `pip3 install virtualenv`
+
+
+**Side Note:** 
+
+This repo is developed taking `us-east-1` as the default region. Please update the scripts to your specific region (if required).
+This repo will create a MongoDB Atlas Project and a free-tier database cluster automatically. No need to create a database cluster manually.
+This repo is created for a demo purpose and IP access is not restricted (0.0.0.0/0). Ensure you strengthen the security by updating the relevant IP Address(if required)
+
 
 1.  ## Setting up the environment
 
@@ -130,13 +136,13 @@ MongoDB Resource Activation in Public Extension:
 
 Alternatively, you can activate the above public extension through AWS CLI also.
 
-Command to list the MongoDB Public Extensions. Note the down the arns for the above four public extension.
+Command to list the MongoDB Public Extensions. Note the down the arns for the above four public extensions.
 
     aws cloudformation list-types \
       --visibility PUBLIC \
       --filters "Category=THIRD_PARTY,TypeNamePrefix=Mongodb"
 
-Command to activate the Public Extension. Use this command to activate all the four public extension mentioned in the previous steps.
+Command to activate the Public Extension. Use this command to activate all four public extensions mentioned in the previous steps.
 
     aws cloudformation activate-type --region us-east-1 --public-type-arn "<arn for the public extension noted down in the previous step>" --execution-role-arn "<arn of the role created in step a>"
 
@@ -191,7 +197,7 @@ After successfully deploying the stack, validate the `Outputs` section of the st
 
 - ###  **Stack for creating the Kinesis Stream: aws-etl-kinesis-stream-stack**
 
-This stack will create two kinesis data streams. Each producer runs for an ingesting stream of events for different customers with their orders. 
+This stack will create two kinesis data streams. Each producer runs an ingesting stream of events for different customers with their orders. 
 
 Initiate the deployment with the following command,
 
@@ -233,15 +239,15 @@ After successfully deploying the stack, Check the `Outputs` section of the stack
 
 
 
-- ### **Stack for creating the AWS Glue job and paramters: aws-etl-glue-job-stack**
+- ### **Stack for creating the AWS Glue job and parameters: aws-etl-glue-job-stack**
 
-This stack will create two AWS Glue Jobs. One job for the customer and another for order. The code is in this location `glue_job_stack/glue_job_scripts/customer_kinesis_streams_s3.py` and `glue_job_stack/glue_job_scripts/order_kinesis_streams_s3.py`
+This stack will create two AWS Glue Jobs. One job for the customer and another for the order. The code is in this location `glue_job_stack/glue_job_scripts/customer_kinesis_streams_s3.py` and `glue_job_stack/glue_job_scripts/order_kinesis_streams_s3.py`
 
       ```bash
       cdk deploy aws-etl-glue-job-stack
       ```
 
-** Stack:**
+**Stack:**
 
 ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/aws_glue_job_stack_output.png)
 
@@ -251,9 +257,9 @@ This stack will create two AWS Glue Jobs. One job for the customer and another f
 
 ** Note **
 
-This CDK application creates MongoDB Atlas Free tier Cluster, as shown in above screen(No.1 & 2). You don't have to create it manuallay. Also, the url of the newly created cluster will be passed to AWS Glue job as a mongodb url paramter.
+The MongoDB URL of the newly created cluster and other parameters will be passed to the AWS Glue job programmatically. Update these parameters to your values (if required)
 
-Location details for "Spark UI logs path" and "Temporary path" will be determined automatically based on current logged-in account.
+Location details for the "Spark UI logs path" and "Temporary path" will be determined automatically based on the currently logged-in account.
 
 **Spark UI logs path:**
       
@@ -263,11 +269,12 @@ Location details for "Spark UI logs path" and "Temporary path" will be determine
 
       `s3://aws-glue-assets-<ACCOUNT_ID>-<REGION_NAME>/temporary/`
 
-Though, You can always pass the parameters using the steps mentioned below.
 
-- ** Update AWS Glue Studio parameters**
+
+- **Screenshot of the AWS Glue parameters**
     
-    <br>
+  <img width="1111" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/e8844b4b-a77e-4ce1-8949-41543716ae26">
+
 
     
 Once you are ready with all stacks, start the producers for the customer and order The code is in this location
@@ -310,10 +317,10 @@ Refer [this link](https://github.com/mongodb/mongodbatlas-cloudformation-resourc
 
 ## Useful commands
 
- * `cdk ls`          list all stacks in the app
+ * `cdk ls`          lists all stacks in the app
  * `cdk synth`       emits the synthesized CloudFormation template
  * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
+ * `cdk diff`        compare deployed stack with the current state
  * `cdk docs`        open CDK documentation
 
 Enjoy!
