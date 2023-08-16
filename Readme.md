@@ -141,7 +141,7 @@ Command to activate the Public Extension. Use this command to activate all the f
     aws cloudformation activate-type --region us-east-1 --public-type-arn "<arn for the public extension noted down in the previous step>" --execution-role-arn "<arn of the role created in step a>"
 
     
-c. Login to MongoDB console and note down the organization ID. Ensure the Organization ID is updated in the global_args.py
+c. Login to the MongoDB console and note down the organization ID. Ensure the Organization ID is updated in the global_args.py
 
 <img width="1159" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/f1f5c45d-557b-4c5b-8035-b4472723ddfc">
       
@@ -149,7 +149,9 @@ d. create an [API Key](https://www.mongodb.com/docs/atlas/configure-api-access/#
 
 <img width="762" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/93f2a8f7-909d-44ed-a8ea-da037c42b8a6">
 
-      
+Restrict the access to the API , with the API Access list. We provided an open access 0.0.0.0/1 for demo purposes only. We **STRONGLY DISCOURAGE** to use this in any production or equivalent environment.  
+
+ 
 e. A profile should be created in the AWS Secrets Manager, containing the MongoDB Atlas Programmatic API Key.
 
 Use [this template](https://github.com/mongodb/mongodbatlas-cloudformation-resources/blob/master/examples/profile-secret.yaml) to create a [new CloudFormation stack](https://console.aws.amazon.com/cloudformation/home#/stacks/create) for the default profile that all resources will attempt to use unless a different override is specified.
