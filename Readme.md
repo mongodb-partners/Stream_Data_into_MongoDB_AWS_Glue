@@ -140,23 +140,31 @@ Command to activate the Public Extension. Use this command to activate all the f
 
     aws cloudformation activate-type --region us-east-1 --public-type-arn "<arn for the public extension noted down in the previous step>" --execution-role-arn "<arn of the role created in step a>"
 
+
     
 c. Login to the MongoDB console and note down the organization ID. Ensure the Organization ID is updated in the global_args.py
 
+
 <img width="1159" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/f1f5c45d-557b-4c5b-8035-b4472723ddfc">
       
+
 d. create an [API Key](https://www.mongodb.com/docs/atlas/configure-api-access/#create-an-api-key-in-an-organization) in an organization with Organization Owner and Organization Project Creation access. Note down API credentials
+
 
 <img width="762" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/93f2a8f7-909d-44ed-a8ea-da037c42b8a6">
 
-Restrict the access to the API , with the API Access list. We provided an open access 0.0.0.0/1 for demo purposes only. We **STRONGLY DISCOURAGE** to use this in any production or equivalent environment.  
+
+Restrict the access to the Organization API, with the API Access list. We provided an open access 0.0.0.0/1 for demo purposes only. We **STRONGLY DISCOURAGE** to use this in any production or equivalent environment.  
 
  
 e. A profile should be created in the AWS Secrets Manager, containing the MongoDB Atlas Programmatic API Key.
 
+
 Use [this template](https://github.com/mongodb/mongodbatlas-cloudformation-resources/blob/master/examples/profile-secret.yaml) to create a [new CloudFormation stack](https://console.aws.amazon.com/cloudformation/home#/stacks/create) for the default profile that all resources will attempt to use unless a different override is specified.
 
+
 **Profile secret Stack:**
+
 
 ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/profile_secret_mongodb_API.png)
 
@@ -174,9 +182,11 @@ After successfully deploying the stack, validate the `Outputs` section of the st
 
 ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/mongo_atlas_stack_output.png)
 
+
 **MongoDB Atlas Cluster:**
 
 ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/mongodb_atlas_cluster.png)
+
 
 
 - ###  **Stack for creating the Kinesis Stream: aws-etl-kinesis-stream-stack**
@@ -195,9 +205,11 @@ After successfully deploying the stack, Check the `Outputs` section of the stack
 
 ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/aws_kinesis_stream_stack_output.png)
 
+
 **Amazon Kinesis Data Stream:**
 
 ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/aws_kinesis_stream.png)
+
 
 
 - ### **Stack for creating the S3 bucket: aws-etl-bucket-stack**
@@ -214,9 +226,11 @@ After successfully deploying the stack, Check the `Outputs` section of the stack
 
 ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/aws_s3_bucket_stack_output.png)
 
+
 **AWS S3 Bucket:**
 
 ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/aws_s3_bucket.png)
+
 
 
 - ### **Stack for creating the AWS Glue job and paramters: aws-etl-glue-job-stack**
