@@ -33,7 +33,7 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
     -  [AWS CLI Installed & Configured](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
     -  [NVM / NPM installed & Configured](https://nvm.sh) 
     -  [AWS CDK Installed & Configured](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html) 
-    -  [MongoDB Atlas Account and set up the Organization ](https://www.mongodb.com/docs/guides/atlas/account/) 
+    -  [MongoDB Atlas Account](https://www.mongodb.com/docs/guides/atlas/account/) and set up the [Organization](https://www.mongodb.com/docs/atlas/government/tutorial/create-organization/) 
     -  [Python Packages](https://www.python.org/downloads/):
           - [Python3](https://packaging.python.org/en/latest/tutorials/installing-packages/#ensure-you-can-run-python-from-the-command-line) - `yum install -y python3`
           - [Python Pip](https://packaging.python.org/en/latest/tutorials/installing-packages/#ensure-you-can-run-pip-from-the-command-line) - `yum install -y python-pip`
