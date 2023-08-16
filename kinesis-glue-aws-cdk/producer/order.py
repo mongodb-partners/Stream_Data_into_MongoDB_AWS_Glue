@@ -5,7 +5,7 @@ import boto3
 import time
 
 # STREAM_NAME = "order"
-STREAM_NAME = "kinesisStream-order"
+STREAM_NAME = "etl-kinesisStream-order"
 
 
 def get_data():
