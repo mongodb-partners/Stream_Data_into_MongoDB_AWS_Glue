@@ -5,7 +5,7 @@ import boto3
 import time
 
 # STREAM_NAME = "customer"
-STREAM_NAME = "kinesisStream-customer"
+STREAM_NAME = "etl-kinesisStream-customer"
 
 # Dictionary to map customer IDs to customer names
 CUSTOMER_MAP = {
