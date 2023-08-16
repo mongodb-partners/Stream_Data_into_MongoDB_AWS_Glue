@@ -82,7 +82,7 @@ In this GitHub repository, you'll find a tangible showcase of how AWS Glue, Amaz
          <img width="1159" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/f1f5c45d-557b-4c5b-8035-b4472723ddfc">
          
 
-       * Please note that using "0.0.0.0/0" as an `IP_ADDRESS` we are allowing access to the database from anywhere. This might be suitable for development or testing purposes but is **highly discouraged** for production environments because it exposes the database to potential attacks from unauthorized sources. 
+       * Please note that using "0.0.0.0/0" as an `IP_ADDRESS` we are allowing access to the database from anywhere. This might be suitable for development or testing purposes but is **HIGHLY DISCOURAGED** for production environments because it exposes the database to potential attacks from unauthorized sources. 
 
        <br>
 
