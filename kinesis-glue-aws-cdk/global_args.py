@@ -14,13 +14,13 @@ class GlobalArgs():
     DATABASE_NAME = "etl-migration"
     COLLECTION_NAME = "etl-customer-demo"
     MONGODB_USER = "etl-mongodb-cdk"
-    MONGODB_PASSWORD = "etlmongodbpasswd"
+    MONGODB_PASSWORD = "etlmongodbpasswd"  # <updated the password>
     S3_BUCKET_NAME = "etl-bucket-demo"
     CUSTOMER_STREAM_NAME = "etl-kinesisStream-customer"
     ORDER_STREAM_NAME = "etl-kinesisStream-order"
     AUTH_DATABASE_NAME = "admin"
-    ORG_ID = ""  # Your organization from MongoDB Atlas account
+    ORG_ID = ""  # <Your organization from MongoDB Atlas account>
     REGION_NAME = "US_EAST_1"
-    IP_ADDRESS = "0.0.0.0/0" # Use for development or testing purpose only
+    IP_ADDRESS = "0.0.0.0/0" # Use for development or testing purposes only
     IP_COMMENT = "AWS Glue CDK Test"
     PROFILE = "default"
