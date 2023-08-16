@@ -30,13 +30,14 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
     This demo, instructions, scripts, and cloudformation template are designed to be run in `us-east-1`. With a few modifications, you can try it out in other regions as well.
 
-    -  AWS CLI Installed & Configured 
-    -  AWS CDK Installed & Configured
-    -  MongoDB Atlas Account 
-    -  Python Packages :
-      - Python3 - `yum install -y python3`
-      - Python Pip - `yum install -y python-pip`
-      - Virtualenv - `pip3 install virtualenv`
+    -  [AWS CLI Installed & Configured](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+    -  [NVM / NPM installed & Configured](https://nvm.sh) 
+    -  AWS CDK Installed & Configured 
+    -  [MongoDB Atlas Account and set up the Organization ](https://www.mongodb.com/docs/guides/atlas/account/) 
+    -  [Python Packages](https://www.python.org/downloads/):
+          - [Python3](https://packaging.python.org/en/latest/tutorials/installing-packages/#ensure-you-can-run-python-from-the-command-line) - `yum install -y python3`
+          - [Python Pip](https://packaging.python.org/en/latest/tutorials/installing-packages/#ensure-you-can-run-pip-from-the-command-line) - `yum install -y python-pip`
+          - [Virtualenv](https://docs.python.org/3/library/venv.html) - `pip3 install virtualenv`
 
 1.  ## Setting up the environment
 
@@ -49,10 +50,14 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
 1.  ## Prepare the dev environment to run AWS CDK
 
-    a. Setup the AWS Environment AWS Access Key ID, AWS Secret Access Key, and optionally AWS Session Token
+    a. Setup the [AWS Environment variable](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) AWS Access Key ID, AWS Secret Access Key, and optionally AWS Session Token
+
+           export AWS_ACCESS_KEY_ID = <"your AWS access key">
+           export AWS_SECRET_ACCESS_KEY =<"your AWS secret access key">
+           export AWS_SESSION_TOKEN = <"your AWS session token">
     
 
-    b. We will use `cdk` to make our deployments easier. Let's go ahead and install the necessary components.
+    b. We will use `cdk` to make our deployments easier. .
 
     ```bash
     # You should have npm pre-installed
@@ -73,8 +78,12 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
        d. update the relevant parameters in global_args.py
        
-       * Update the `OrgId` Organization ID from your MongoDB Atlas account. 
-       * Please note that, Using "0.0.0.0/0" as an `IP_ADDRESS` we are allowing access from anywhere. This might be suitable for development or testing purposes but is highly discouraged for production environments because it exposes the database to potential attacks from unauthorized sources.
+       * Update the `OrgId` Organization ID from your MongoDB Atlas account.
+  
+         <img width="1159" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/f1f5c45d-557b-4c5b-8035-b4472723ddfc">
+         
+
+       * Please note that using "0.0.0.0/0" as an `IP_ADDRESS` we are allowing access to the database from anywhere. This might be suitable for development or testing purposes but is **highly discouraged** for production environments because it exposes the database to potential attacks from unauthorized sources. 
 
        <br>
 
@@ -96,13 +105,13 @@ Amazon Kinesis cost-effectively processes and analyzes streaming data at any sca
 
     Let us walk through each of the stacks,
 
-    ### **Stack: aws-etl-mongo-atlas-stack**
+    ### **Stack for MongoDB Atlas: aws-etl-mongo-atlas-stack**
 
-      This stack will create MongoDB Atlas Free tier Cluster.
+      This stack will create MongoDB Atlas Project and a free tier database cluster with a user and network permission (Open).
 
       **Prerequisite:**
       
-      a. create a role with its trust relationship as a CloudFormation service
+      a. create an AWS role with its trust relationship as a CloudFormation service
 
       Use [this template](https://github.com/mongodb/mongodbatlas-cloudformation-resources/blob/master/examples/execution-role.yaml) to create a [new CloudFormation stack](https://console.aws.amazon.com/cloudformation/home#/stacks/create) to create the execution role.
 
