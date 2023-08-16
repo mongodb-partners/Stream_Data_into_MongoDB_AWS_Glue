@@ -255,7 +255,7 @@ This stack will create two AWS Glue Jobs. One job for the customer and another f
 
 ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/aws_glue_job.png)
 
-** Note **
+**Note**
 
 The MongoDB URL of the newly created cluster and other parameters will be passed to the AWS Glue job programmatically. Update these parameters to your values (if required)
 
@@ -265,7 +265,7 @@ Location details for the "Spark UI logs path" and "Temporary path" will be deter
       
       `s3://aws-glue-assets-<ACCOUNT_ID>-<REGION_NAME>/sparkHistoryLogs` 
 
-** Temporary path:**
+**Temporary path:**
 
       `s3://aws-glue-assets-<ACCOUNT_ID>-<REGION_NAME>/temporary/`
 
