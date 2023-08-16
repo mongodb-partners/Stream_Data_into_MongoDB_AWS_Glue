@@ -69,7 +69,7 @@ In this GitHub repository, you'll find a tangible showcase of how AWS Glue, Amaz
     ```
     Side Note: for development setup use requirements-dev.txt
 
-    c. [Bootstrap]()https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html) the application with AWS Account
+    c. [Bootstrap](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html) the application with AWS Account
 
         
         cdk bootstrap
