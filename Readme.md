@@ -77,7 +77,7 @@ In this GitHub repository, you'll find a tangible showcase of how AWS Glue, Amaz
 
        d. update the OrgID parameters in global_args.py
        
-       * Update the `OrgId` Organization ID from your MongoDB Atlas account.
+       * Update the `OrgId` Organization ID from your MongoDB Atlas account. The below screenshot shows the location to get the Organization ID from MongoDB Atlas.
   
          <img width="1159" alt="image" src="https://github.com/mongodb-partners/Stream_Data_into_MongoDB_AWS_Glue/assets/101570105/f1f5c45d-557b-4c5b-8035-b4472723ddfc">
          
