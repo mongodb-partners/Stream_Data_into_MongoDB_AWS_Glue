@@ -75,7 +75,7 @@ In this GitHub repository, you'll find a tangible showcase of how AWS Glue, Amaz
         cdk bootstrap
     
 
-       d. update the relevant parameters in global_args.py
+       d. update the OrgID parameters in global_args.py
        
        * Update the `OrgId` Organization ID from your MongoDB Atlas account.
   
