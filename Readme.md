@@ -124,11 +124,24 @@ b.The following Public Extension in the Cloudormation Registry should be activat
               MongoDB::Atlas::Cluster,
               MongoDB::Atlas::ProjectIpAccessList
 
-Pass the ARN of the role from the earlier step as an input to activate the MongoDB resource in Public Extension.
+Pass the ARN of the role from the earlier step as input to activate the MongoDB resource in Public Extension.
 
 MongoDB Resource Activation in Public Extension:
 
 ![AWS Glue Data Integration: Streaming ETL with AWS Glue](kinesis-glue-aws-cdk/images/activate_mongodb_resource.png)
+
+Alternatively, you can activate the above public extension through AWS CLI also.
+
+Command to list the MongoDB Public Extensions. Note the down the arns for the above four public extension.
+
+    aws cloudformation list-types \
+      --visibility PUBLIC \
+      --filters "Category=THIRD_PARTY,TypeNamePrefix=Mongodb"
+
+Command to activate the Public Extension. Use this command to activate all the four public extension mentioned in the previous steps.
+
+    aws cloudformation activate-type --region us-east-1 --public-type-arn "<arn for the public extension noted down in the previous step>" --execution-role-arn "<arn of the role created in step a>"
+
     
 c. Login to MongoDB console and note down the organization ID. Ensure the Organization ID is updated in the global_args.py
 
