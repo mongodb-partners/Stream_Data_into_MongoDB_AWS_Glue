@@ -81,7 +81,7 @@ This repo is created for a demo purpose and IP access is not restricted (0.0.0.0
         cdk bootstrap
     
 
-       d. update the ORG_ID and MONGODB_PASSWORD parameters in global_args.py in kinesis-glue-aws-cdk folder.
+       d. set the ORG_ID as a enviornment variable in `.env` file. All other parameters are set to default in global_args.py in kinesis-glue-aws-cdk folder. MONGODB_USER and MONGODB_PASSWORD parameters are set directly in mongodb_atlas_stack.py and glue_job_stack.py
        
        * The below screenshot shows the location to get the Organization ID from MongoDB Atlas.
   

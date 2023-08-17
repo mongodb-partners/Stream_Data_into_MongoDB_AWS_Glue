@@ -7,24 +7,32 @@ from awscdk_resources_mongodbatlas import (AdvancedRegionConfig, AdvancedReplica
                                            ProjectProps, ClusterProps, AtlasBasic,
                                            AdvancedRegionConfigProviderName)
 from global_args import GlobalArgs
+import os
+from dotenv import find_dotenv, load_dotenv
 
 class MongoDBAtlasStack(Stack):
+    
+    dotenv_path = find_dotenv();
+    load_dotenv(dotenv_path);
     
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        org_id_var = GlobalArgs.ORG_ID,
+        org_id_var = os.getenv("ORG_ID"),
         region_var =  GlobalArgs.REGION_NAME,
         profile_name_var = GlobalArgs.PROFILE,
         ip_addr_var = GlobalArgs.IP_ADDRESS,
         ip_comment_var = GlobalArgs.IP_COMMENT
+        instanceSize = GlobalArgs.INSTANCE_SIZE
+        ebsVolumeType = GlobalArgs.EBS_VOLUME_TYPE
+        backingProviderName = GlobalArgs.BACKING_PROVIDER_NAME
 
         region_configs_var = [
-            AdvancedRegionConfig(analytics_specs=Specs(node_count=1, instance_size="M0", ebs_volume_type="STANDARD"),
-                                 electable_specs=Specs(node_count=3, instance_size="M0", ebs_volume_type="STANDARD"),
+            AdvancedRegionConfig(analytics_specs=Specs(node_count=1, instance_size=instanceSize, ebs_volume_type=ebsVolumeType),
+                                 electable_specs=Specs(node_count=3, instance_size=instanceSize, ebs_volume_type=ebsVolumeType),
                                  priority=7,
                                  provider_name=AdvancedRegionConfigProviderName.TENANT,
-                                 backing_provider_name="AWS",
+                                 backing_provider_name=backingProviderName,
                                  region_name=''.join(region_var))]
         replication_specs_var = [AdvancedReplicationSpec(advanced_region_configs=region_configs_var, num_shards=1)]
 
@@ -36,8 +44,8 @@ class MongoDBAtlasStack(Stack):
                                     ),
                                     db_user_props=DatabaseUserProps(
                                         database_name=GlobalArgs.AUTH_DATABASE_NAME, 
-                                        username=GlobalArgs.MONGODB_USER, 
-                                        password=GlobalArgs.MONGODB_PASSWORD
+                                        username="etl_demo_user", 
+                                        password="etlmongodbpasswd"
                                     ),
                                     project_props=ProjectProps(
                                         org_id = ''.join(org_id_var)
@@ -50,11 +58,11 @@ class MongoDBAtlasStack(Stack):
        
         CfnOutput(self,
                   f"stdUrl",
-                  description=f"URL of mongoDb url",
+                  description=f"URL of mongoDb",
                   value=self.atlas_basic_l3.m_cluster.connection_strings.standard)
         CfnOutput(self,
                   f"stdSrvUrl",
-                  description=f"Srv URL of mongoDb url",
+                  description=f"Srv URL of mongoDb",
                   value=self.atlas_basic_l3.m_cluster.connection_strings.standard_srv)
         
         

@@ -107,8 +107,8 @@ class GlueJobStack(Stack):
                 "--MONGODB_URL": mongodb_url+str("/test"),
                 "--DATABASE_NAME": GlobalArgs.DATABASE_NAME,
                 "--COLLECTION_NAME": GlobalArgs.COLLECTION_NAME,
-                "--MONGODB_USER": GlobalArgs.MONGODB_USER,
-                "--MONGODB_PASSWORD": GlobalArgs.MONGODB_PASSWORD,
+                "--MONGODB_USER": "etl_demo_user",
+                "--MONGODB_PASSWORD": "etlmongodbpasswd",
                 "--BUCKET_URL": str("s3://")+etl_bkt.bucket_name+str("/customer/"),
                 "--STREAM_NAME":cust_src_stream.stream_name,
                 "--enable-continuous-cloudwatch-log": "true", # Enable logging
@@ -148,8 +148,8 @@ class GlueJobStack(Stack):
                 "--MONGODB_URL": mongodb_url+str("/test"),
                 "--DATABASE_NAME": GlobalArgs.DATABASE_NAME,
                 "--COLLECTION_NAME": GlobalArgs.COLLECTION_NAME,
-                "--MONGODB_USER": GlobalArgs.MONGODB_USER,
-                "--MONGODB_PASSWORD": GlobalArgs.MONGODB_PASSWORD,
+                "--MONGODB_USER": "etl_demo_user",
+                "--MONGODB_PASSWORD": "etlmongodbpasswd",
                 "--BUCKET_URL": str("s3://")+etl_bkt.bucket_name+str("/order/"),
                 "--STREAM_NAME":order_src_stream.stream_name,
                 "--enable-continuous-cloudwatch-log": "true", # Enable logging
