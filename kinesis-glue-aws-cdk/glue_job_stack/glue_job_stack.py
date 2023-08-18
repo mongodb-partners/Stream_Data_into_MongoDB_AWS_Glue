@@ -2,7 +2,6 @@ from constructs import Construct
 from aws_cdk import aws_iam as _iam
 from aws_cdk import aws_s3_assets as _s3_assets
 import aws_cdk as core
-import boto3
 from aws_cdk import (
     Duration,
     Stack,
@@ -14,19 +13,6 @@ from aws_cdk import (
     aws_sns_subscriptions as subs,
 )
 from global_args import GlobalArgs
-
-def get_aws_region():
-    # Create a new session using the default credentials and configuration
-    session = boto3.Session()
-    return session.region_name
-
-def get_aws_account_id():
-    # Create a new session using the default credentials and configuration
-    session = boto3.Session()
-    return session.client('sts').get_caller_identity().get('Account')
-
-aws_region = get_aws_region()
-aws_account_id = get_aws_account_id()
 
 class GlueJobStack(Stack):
     def __init__(
@@ -112,9 +98,9 @@ class GlueJobStack(Stack):
                 "--BUCKET_URL": str("s3://")+etl_bkt.bucket_name+str("/customer/"),
                 "--STREAM_NAME":cust_src_stream.stream_name,
                 "--enable-continuous-cloudwatch-log": "true", # Enable logging
-                "--TempDir": str("s3://aws-glue-assets-")+str(aws_account_id)+str("-")+str(aws_region)+str("/temporary/"),
+                "--TempDir": str("s3://")+etl_bkt.bucket_name+str("/temporary/"),
                 "--enable-spark-ui": "true",
-                "--spark-event-logs-path":str("s3://aws-glue-assets-")+str(aws_account_id)+str("-")+str(aws_region)+str("/sparkHistoryLogs/")
+                "--spark-event-logs-path":str("s3://")+etl_bkt.bucket_name+str("/sparkHistoryLogs/")
 
             },
             max_retries=0,
@@ -153,9 +139,9 @@ class GlueJobStack(Stack):
                 "--BUCKET_URL": str("s3://")+etl_bkt.bucket_name+str("/order/"),
                 "--STREAM_NAME":order_src_stream.stream_name,
                 "--enable-continuous-cloudwatch-log": "true", # Enable logging
-                "--TempDir": str("s3://aws-glue-assets-")+str(aws_account_id)+str("-")+str(aws_region)+str("/temporary/"),
+                "--TempDir": str("s3://")+etl_bkt.bucket_name+str("/temporary/"),
                 "--enable-spark-ui": "true",
-                "--spark-event-logs-path":str("s3://aws-glue-assets-")+str(aws_account_id)+str("-")+str(aws_region)+str("/sparkHistoryLogs/")
+                "--spark-event-logs-path":str("s3://")+etl_bkt.bucket_name+str("/sparkHistoryLogs/")
             },
             max_retries=0,
             glue_version="3.0",

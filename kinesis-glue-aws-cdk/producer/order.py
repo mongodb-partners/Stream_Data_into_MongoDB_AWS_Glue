@@ -33,22 +33,26 @@ def get_data():
     ]
     
     return {
-        'order_id': random.randint(1, 30),
-        'customer_id': random.randint(1, 10),
+        'order_id': random.randint(1, 100),
+        'customer_id': random.randint(1, 500),
         'product_name': random.choice(provisionary_products),
         'quantity': random.randint(1, 10),
         'price': round(random.uniform(1.0, 50.0), 2)
     }
 
 
-def generate(stream_name, kinesis_client):
-    while True:
+def generate(stream_name, kinesis_client, max_records=500):
+    record_count = 0
+    while record_count < max_records:
         data = get_data()
         print(data)
-        kinesis_client.put_record(
+        record = kinesis_client.put_record(
             StreamName=stream_name,
             Data=json.dumps(data),
             PartitionKey=str(data['customer_id']))
+        print(record)
+        record_count += 1
+        print('record_count for order:===>', record_count)
         time.sleep(1)
 
 

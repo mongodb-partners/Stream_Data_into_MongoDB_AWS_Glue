@@ -7,23 +7,19 @@ import time
 # STREAM_NAME = "customer"
 STREAM_NAME = "etl-kinesisStream-customer"
 
-# Dictionary to map customer IDs to customer names
-CUSTOMER_MAP = {
-    1: 'NICK',
-    2: 'EDEN',
-    3: 'GRACE',
-    4: 'MATTHEW',
-    5: 'UMA',
-    6: 'KARL',
-    7: 'FRED',
-    8: 'HELEN',
-    9: 'DAN',
-    10: 'BOB'
-}
+# Set to keep track of generated customer IDs
+generated_customer_ids = set()
+
+def get_unique_customer_id():
+    while True:
+        customer_id = random.randint(1, 500)
+        if customer_id not in generated_customer_ids:
+            generated_customer_ids.add(customer_id)
+            return customer_id
 
 def get_data():
-    customer_id = random.randint(1, 10)
-    customer_name = CUSTOMER_MAP[customer_id]
+    customer_id = get_unique_customer_id()
+    customer_name = str('CUSTOMER') + '_' + str(customer_id)
     email_id = customer_name.lower() + "@gmail.com"
     country_id = customer_id
     return {
@@ -33,8 +29,9 @@ def get_data():
         'country_id': country_id
     }
 
-def generate(stream_name, kinesis_client):
-    while True:
+def generate(stream_name, kinesis_client, max_records=500):
+    record_count = 0
+    while record_count < max_records:
         data = get_data()
         print(data)
         record = kinesis_client.put_record(
@@ -42,6 +39,8 @@ def generate(stream_name, kinesis_client):
             Data=json.dumps(data),
             PartitionKey=str(data['customer_id']))
         print(record)
+        record_count += 1
+        print('record_count for customer:===>', record_count)
         time.sleep(1)
 
 if __name__ == '__main__':

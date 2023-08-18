@@ -259,15 +259,15 @@ This stack will create two AWS Glue Jobs. One job for the customer and another f
 
 The MongoDB URL of the newly created cluster and other parameters will be passed to the AWS Glue job programmatically. Update these parameters to your values (if required)
 
-Location details for the "Spark UI logs path" and "Temporary path" will be determined automatically based on the currently logged-in account.
+"Spark UI logs path" and "Temporary path" details will be maintained in the same bucket location with folder name `/sparkHistoryLogs` and `/temporary`.
 
 **Spark UI logs path:**
       
-      `s3://aws-glue-assets-<ACCOUNT_ID>-<REGION_NAME>/sparkHistoryLogs` 
+      `s3://<S3_BUCKET_NAME>/sparkHistoryLogs` 
 
 **Temporary path:**
 
-      `s3://aws-glue-assets-<ACCOUNT_ID>-<REGION_NAME>/temporary/`
+      `s3://<S3_BUCKET_NAME>/temporary/`
 
 
 
