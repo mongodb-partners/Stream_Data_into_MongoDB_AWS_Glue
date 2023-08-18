@@ -48,7 +48,7 @@ class GlueJobStack(Stack):
             assumed_by=_iam.ServicePrincipal("glue.amazonaws.com"),
             managed_policies=[
                 _iam.ManagedPolicy.from_aws_managed_policy_name(
-                    "AmazonS3ReadOnlyAccess"
+                    "AmazonS3FullAccess"
                 ),
                 _iam.ManagedPolicy.from_aws_managed_policy_name(
                     "service-role/AWSGlueServiceRole"
