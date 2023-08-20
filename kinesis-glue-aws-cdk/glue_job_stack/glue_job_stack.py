@@ -14,7 +14,14 @@ from aws_cdk import (
 )
 from global_args import GlobalArgs
 
+from dotenv import find_dotenv, load_dotenv
+import os
+
 class GlueJobStack(Stack):
+
+    dotenv_path = find_dotenv();
+    load_dotenv(dotenv_path);
+    
     def __init__(
         self, 
         scope: Construct, 
@@ -74,7 +81,12 @@ class GlueJobStack(Stack):
             path="glue_job_stack/glue_job_scripts/customer_kinesis_s3.py"
         )
         
-        # Create Glue Job for customer
+        # Create a Glue Job for the customer
+
+        username = os.getenv("MONGODB_USER")
+        password = os.getenv("MONGODB_PASSWORD")   
+
+        
         customer_job_name = 'CustomerGlueJob'
         customer_job = glue.CfnJob(
             self, 
@@ -93,8 +105,8 @@ class GlueJobStack(Stack):
                 "--MONGODB_URL": mongodb_url+str("/test"),
                 "--DATABASE_NAME": GlobalArgs.DATABASE_NAME,
                 "--COLLECTION_NAME": GlobalArgs.COLLECTION_NAME,
-                "--MONGODB_USER": "etl_demo_user",
-                "--MONGODB_PASSWORD": "etlmongodbpasswd",
+                "--MONGODB_USER": username,
+                "--MONGODB_PASSWORD": password,
                 "--BUCKET_URL": str("s3://")+etl_bkt.bucket_name+str("/customer/"),
                 "--STREAM_NAME":cust_src_stream.stream_name,
                 "--enable-continuous-cloudwatch-log": "true", # Enable logging
@@ -104,7 +116,7 @@ class GlueJobStack(Stack):
 
             },
             max_retries=0,
-            glue_version="3.0",
+            glue_version="4.0",
             number_of_workers=2,
             worker_type="G.025X"
             )
@@ -134,8 +146,8 @@ class GlueJobStack(Stack):
                 "--MONGODB_URL": mongodb_url+str("/test"),
                 "--DATABASE_NAME": GlobalArgs.DATABASE_NAME,
                 "--COLLECTION_NAME": GlobalArgs.COLLECTION_NAME,
-                "--MONGODB_USER": "etl_demo_user",
-                "--MONGODB_PASSWORD": "etlmongodbpasswd",
+                "--MONGODB_USER": username,
+                "--MONGODB_PASSWORD": password,
                 "--BUCKET_URL": str("s3://")+etl_bkt.bucket_name+str("/order/"),
                 "--STREAM_NAME":order_src_stream.stream_name,
                 "--enable-continuous-cloudwatch-log": "true", # Enable logging
@@ -144,7 +156,7 @@ class GlueJobStack(Stack):
                 "--spark-event-logs-path":str("s3://")+etl_bkt.bucket_name+str("/sparkHistoryLogs/")
             },
             max_retries=0,
-            glue_version="3.0",
+            glue_version="4.0",
             number_of_workers=2,
             worker_type="G.025X"
             )
