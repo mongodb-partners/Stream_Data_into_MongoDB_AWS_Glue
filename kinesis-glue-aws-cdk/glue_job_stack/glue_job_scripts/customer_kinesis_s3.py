@@ -52,7 +52,7 @@ dataframe_KinesisStream_node1 = glueContext.create_data_frame.from_options(
 )
 
 write_mongo_options = {
-    "uri": args['MONGODB_URL'],
+    "connection.uri": args['MONGODB_URL'],
     "database": args['DATABASE_NAME'],
     "collection": args['COLLECTION_NAME'],
     "username": args['MONGODB_USER'],
