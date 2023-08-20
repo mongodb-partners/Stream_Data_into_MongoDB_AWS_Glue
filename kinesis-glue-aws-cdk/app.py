@@ -42,4 +42,26 @@ etl_glue_job_stack = GlueJobStack(
     mongodb_url = etl_mongo_atlas_stack.get_connection_string_srv
 )
 
+# Get all the stacks
+cdk.Tags.of(etl_bkt_stack).add("owner", GlobalArgs.TAG_OWNER)
+cdk.Tags.of(etl_bkt_stack).add("purpose", GlobalArgs.TAG_PURPOSE)
+cdk.Tags.of(etl_bkt_stack).add("expire-on", GlobalArgs.TAG_EXPIRE_ON)
+cdk.Tags.of(etl_bkt_stack).add("cdk_stack", "aws-etl-bkt-stack")
+
+cdk.Tags.of(etl_glue_job_stack).add("owner", GlobalArgs.TAG_OWNER)
+cdk.Tags.of(etl_glue_job_stack).add("purpose", GlobalArgs.TAG_PURPOSE)
+cdk.Tags.of(etl_glue_job_stack).add("expire-on", GlobalArgs.TAG_EXPIRE_ON)
+cdk.Tags.of(etl_glue_job_stack).add("cdk_stack", "aws-etl-glue-job-stack")
+
+cdk.Tags.of(etl_kinesis_stack).add("owner", GlobalArgs.TAG_OWNER)
+cdk.Tags.of(etl_kinesis_stack).add("purpose", GlobalArgs.TAG_PURPOSE)
+cdk.Tags.of(etl_kinesis_stack).add("expire-on", GlobalArgs.TAG_EXPIRE_ON)
+cdk.Tags.of(etl_kinesis_stack).add("cdk_stack", "aws-etl-kinesis-stack")
+
+cdk.Tags.of(etl_mongo_atlas_stack).add("owner", GlobalArgs.TAG_OWNER)
+cdk.Tags.of(etl_mongo_atlas_stack).add("purpose", GlobalArgs.TAG_PURPOSE)
+cdk.Tags.of(etl_mongo_atlas_stack).add("expire-on", GlobalArgs.TAG_EXPIRE_ON)
+cdk.Tags.of(etl_mongo_atlas_stack).add("cdk_stack", "aws-etl-mongo-atlas-stack")
+
+
 app.synth()
