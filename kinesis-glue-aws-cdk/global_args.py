@@ -27,3 +27,8 @@ class GlobalArgs():
     INSTANCE_SIZE = "M0"
     EBS_VOLUME_TYPE = "STANDARD"
     BACKING_PROVIDER_NAME = "AWS"
+
+      # Tag details
+    TAG_OWNER = "owner"
+    TAG_PURPOSE = "data streaming to MongoDB Atlas"
+    TAG_EXPIRE_ON = "2024-01-01"
