@@ -26,6 +26,8 @@ class MongoDBAtlasStack(Stack):
         instanceSize = GlobalArgs.INSTANCE_SIZE
         ebsVolumeType = GlobalArgs.EBS_VOLUME_TYPE
         backingProviderName = GlobalArgs.BACKING_PROVIDER_NAME
+        username = os.getenv("MONGODB_USER")
+        password = os.getenv("MONGODB_PASSWORD")
 
         region_configs_var = [
             AdvancedRegionConfig(analytics_specs=Specs(node_count=1, instance_size=instanceSize, ebs_volume_type=ebsVolumeType),
@@ -44,8 +46,8 @@ class MongoDBAtlasStack(Stack):
                                     ),
                                     db_user_props=DatabaseUserProps(
                                         database_name=GlobalArgs.AUTH_DATABASE_NAME, 
-                                        username="etl_demo_user", 
-                                        password="etlmongodbpasswd"
+                                        username=username,
+                                        password=password
                                     ),
                                     project_props=ProjectProps(
                                         org_id = ''.join(org_id_var)
